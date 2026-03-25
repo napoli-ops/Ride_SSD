@@ -95,58 +95,76 @@
         </div>
     </footer>
 
-    <div id="booking-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4">
-        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onclick="toggleModal()"></div>
-        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl p-8 relative z-10 overflow-y-auto max-h-[90vh]">
-            <button onclick="toggleModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition"><i class="fas fa-times"></i></button>
+   <div id="booking-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4 py-6">
+    <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onclick="toggleModal()"></div>
+    
+    <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl p-6 md:p-8 relative z-10 overflow-y-auto max-h-full">
+        
+        <button onclick="toggleModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition p-2">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+        
+        <h2 class="text-2xl font-bold mb-6 text-gray-900">
+            Book <br> 
+            <span id="selected-car-name" class="text-blue-600">Ride</span>
+        </h2>
+        
+        <div class="space-y-4">
+            <input type="hidden" id="selected-car-id">
             
-            <h2 class="text-2xl font-bold mb-6 text-gray-900">Book <br> <span id="selected-car-name" class="text-blue-600">Ride</span></h2>
+            <input type="text" id="pickup-location" placeholder="Pickup Location" 
+                   class="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-blue-500 transition">
             
-            <div class="space-y-4">
-                <input type="hidden" id="selected-car-id">
-                <input type="text" id="pickup-location" placeholder="Pickup Location" class="w-full p-4 bg-gray-50 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="date" id="start-date" class="p-4 bg-gray-50 rounded-xl border">
-                    <input type="date" id="end-date" class="p-4 bg-gray-50 rounded-xl border">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col">
+                    <label class="text-[10px] uppercase font-bold text-gray-400 ml-2 mb-1">Start Date</label>
+                    <input type="date" id="start-date" class="p-4 bg-gray-50 rounded-xl border border-gray-200">
                 </div>
-
-                <div class="pt-2">
-                    <label class="block text-xs font-bold text-gray-400 uppercase mb-3">Payment Method</label>
-                    <div class="grid grid-cols-2 gap-4">
-                        <label class="flex items-center p-4 border-2 rounded-2xl cursor-pointer has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50">
-                            <input type="radio" name="payment" value="card" class="hidden" onchange="togglePaymentFields('card')" checked>
-                            <span class="font-bold text-gray-700"><i class="fas fa-credit-card mr-2 text-blue-600"></i>Card</span>
-                        </label>
-                        <label class="flex items-center p-4 border-2 rounded-2xl cursor-pointer has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50">
-                            <input type="radio" name="payment" value="momo" class="hidden" onchange="togglePaymentFields('momo')">
-                            <span class="font-bold text-gray-700"><i class="fas fa-mobile-alt mr-2 text-yellow-600"></i>MoMo</span>
-                        </label>
-                    </div>
+                <div class="flex flex-col">
+                    <label class="text-[10px] uppercase font-bold text-gray-400 ml-2 mb-1">End Date</label>
+                    <input type="date" id="end-date" class="p-4 bg-gray-50 rounded-xl border border-gray-200">
                 </div>
-
-                <div id="card-details-fields" class="space-y-3 bg-gray-50 p-4 rounded-2xl border">
-                    <input type="text" placeholder="Card Number" class="w-full p-3 bg-white rounded-lg border outline-none">
-                    <div class="grid grid-cols-2 gap-3">
-                        <input type="text" placeholder="MM/YY" class="w-full p-3 bg-white rounded-lg border outline-none">
-                        <input type="text" placeholder="CVV" class="w-full p-3 bg-white rounded-lg border outline-none">
-                    </div>
-                </div>
-
-                <div id="momo-details-fields" class="hidden space-y-3 bg-gray-50 p-4 rounded-2xl border">
-                    <select id="momo-network" class="w-full p-3 bg-white rounded-lg border outline-none font-semibold text-gray-700">
-                        <option value="" disabled selected>Select Mobile Money service</option>
-                        <option value="mtn">MTN Mobile Money</option>
-                        <option value="Digitel">Digicash</option>
-                        <option value="Zain SSD">M-Gurush</option>
-                    </select>
-                    <input type="tel" id="momo-number" placeholder="Phone Number (e.g., +211...)" class="w-full p-3 bg-white rounded-lg border outline-none">
-                </div>
-
-                <button onclick="processBooking()" class="w-full bg-blue-600 text-white p-5 rounded-2xl font-bold hover:bg-blue-700 transition shadow-lg mt-4">Confirm & Pay Now</button>
             </div>
+
+            <div class="pt-2">
+                <label class="block text-xs font-bold text-gray-400 uppercase mb-3">Payment Method</label>
+                <div class="grid grid-cols-1 xs:grid-cols-2 gap-3">
+                    <label class="flex items-center p-4 border-2 rounded-2xl cursor-pointer has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50 transition">
+                        <input type="radio" name="payment" value="card" class="hidden" onchange="togglePaymentFields('card')" checked>
+                        <span class="font-bold text-gray-700 flex items-center"><i class="fas fa-credit-card mr-2 text-blue-600"></i>Card</span>
+                    </label>
+                    <label class="flex items-center p-4 border-2 rounded-2xl cursor-pointer has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50 transition">
+                        <input type="radio" name="payment" value="momo" class="hidden" onchange="togglePaymentFields('momo')">
+                        <span class="font-bold text-gray-700 flex items-center"><i class="fas fa-mobile-alt mr-2 text-yellow-600"></i>MoMo</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="card-details-fields" class="space-y-3 bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                <input type="text" placeholder="Card Number" class="w-full p-3 bg-white rounded-lg border outline-none focus:ring-1 focus:ring-blue-500">
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="text" placeholder="MM/YY" class="w-full p-3 bg-white rounded-lg border outline-none">
+                    <input type="text" placeholder="CVV" class="w-full p-3 bg-white rounded-lg border outline-none">
+                </div>
+            </div>
+
+            <div id="momo-details-fields" class="hidden space-y-3 bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                <select id="momo-network" class="w-full p-3 bg-white rounded-lg border outline-none font-semibold text-gray-700">
+                    <option value="" disabled selected>Select Mobile Money service</option>
+                    <option value="mtn">MTN Mobile Money</option>
+                    <option value="Digitel">Digicash</option>
+                    <option value="Zain SSD">M-Gurush</option>
+                </select>
+                <input type="tel" id="momo-number" placeholder="Phone Number (e.g., +211...)" class="w-full p-3 bg-white rounded-lg border outline-none">
+            </div>
+
+            <button onclick="processBooking()" 
+                    class="w-full bg-blue-600 text-white p-4 md:p-5 rounded-2xl font-bold hover:bg-blue-700 transition shadow-lg mt-4 active:scale-95">
+                Confirm & Pay Now
+            </button>
         </div>
     </div>
+</div>
 
     <div id="status-toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[200] hidden transition-all duration-500 transform translate-y-20 opacity-0 pointer-events-none">
         <div id="toast-content" class="flex items-center space-x-3 px-8 py-4 rounded-2xl shadow-2xl border-2 bg-white">
