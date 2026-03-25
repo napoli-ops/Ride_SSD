@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Ride SSD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .glass-nav { background: rgba(123, 231, 321, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+        
+        /* Smooth transition for the slides */
+        .slide {
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="glass-nav sticky top-0 z-50 px-4 py-2 flex justify-between items-center">
+        <a href="index.html" class="flex items-center">
+            <img src="ride ss.png" class="h-20 w-auto mix-blend-multiply" alt="Ride SSD Logo">
+            <img src="navbar.png" class="h-20 w-auto ml-2" alt="Ride SSD Text">
+        </a>
+        <div class="hidden md:flex space-x-8 font-semibold text-gray-600">
+            <a href="index.html" class="hover:text-blue-800 transition text-xl">Home</a>
+            <a href="about.html" class="text-blue-600 transition text-xl border-b-2 border-blue-600">About</a>
+        </div>
+        <button class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition">Sign In</button>
+    </nav>
+
+    <main class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-blue-600 font-bold uppercase tracking-widest text-sm">Our Story</span>
+                    <h1 class="text-5xl font-extrabold text-gray-900 mt-4 mb-8">Redefining <br> Travel in <span class="text-blue-600">South Sudan</span></h1>
+                    <p class="text-gray-800 text-xl leading-relaxed mb-6">
+                        Established in 2026, Ride SSD was born out of a simple need: reliable, high-quality transportation for South Sudan's growing landscape. 
+                    </p>
+                    <p class="text-gray-800 text-xl leading-relaxed mb-10">
+                        Whether you are a professional heading to a meeting in a sleek sedan or an adventurer exploring the outskirts in a rugged 4x4, we ensure your journey is safe, comfortable, and stylish.
+                    </p>
+                    <p class="text-gray-800 text-xl leading-relaxed mb-10">
+                        We provide wheels that suit our culture, terrain and various lifestyles. Our fleet is reliably maintained by a team second to none. <br> 
+                    </p>
+                    <p class="text-blue-600 text-xl leading-relaxed mb-10 text-4xl font-bold ">"We can be trusted."</p>
+                    
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-3xl font-extrabold text-gray-900">50+</h3>
+                            <p class="text-gray-500 font-semibold">Premium Vehicles</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-extrabold text-gray-900">100%</h3>
+                            <p class="text-gray-500 font-semibold">Safe Deliveries</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative h-[500px] w-full">
+                    <div class="absolute -top-6 -left-6 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+                    
+   <div id="slideshow" class="flex items-center justify-center relative rounded-[2rem] shadow-2xl w-full h-full overflow-hidden bg-gray-200">
+    
+    <img src="adventure.png" class="slide opacity-100 object-contain w-4/4 h-4/4" alt="Fleet 1">
+    <img src="biz.png" class="slide absolute opacity-0 object-contain w-4/4 h-4/4" alt="Fleet 2">
+    <img src="weekend.png" class="slide absolute opacity-0 object-contain w-4/4 h-4/4" alt="Fleet 3">
+    <img src="Luxor.png" class="slide absolute opacity-0 object-contain w-4/4 h-4/4" alt="Fleet 4">
+    <img src="travel.png" class="slide absolute opacity-0 object-contain w-4/4 h-4/4" alt="Fleet 5">
+</div>
+</div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400 text-xl mb-4 text-xl py-5px px-5px">Questions?<br> Reach out to us at <a href="mailto:ridessd@gmail.com" class="text-blue-400">ridessd@gmail.com</a></p>
+            <div class="border-t border-gray-800 pt-8 text-gray-500 text-xl">
+                <p>© 2026 Ride SSD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            // Fade out current slide
+            slides[currentSlide].style.opacity = '0';
+            
+            // Increment index
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            // Fade in next slide
+            slides[currentSlide].style.opacity = '1';
+        }
+
+        // Run the slideshow every 4 seconds
+        setInterval(nextSlide, 4000);
+    </script>
+
+</body>
+</html>

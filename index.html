@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ride SSD | Premium Car Rentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
+        .car-card:hover img { transform: scale(1.05); }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+        .slide { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        #booking-modal.hidden { display: none; }
+        #booking-modal { display: flex; animation: fadeIn 0.3s ease-out; }
+        .toast-active { transform: translate(-50%, 0) !important; opacity: 1 !important; }
+        .invert-logo { filter: invert(1); }
+    </style>
+
+</head>
+<body>
+
+    <nav class="glass-nav sticky top-0 z-50 px-4 py-2 flex justify-between items-center">
+        <a href="#" class="flex items-center">
+            <img src="ride ss.png" class="h-20 w-auto blend-mode-mode-multiply" alt="Ride SSD Logo" style="height: 150px; width: auto;">
+            <img src="navbar.png" class="h-6 w-auto ml-2" alt="Ride SSD Text Logo"  style="height: 100px; width: auto;">
+        </a>
+        <div class="hidden md:flex space-x-8 font-semibold text-gray-600 ">
+            <a href="index.html" onclick="handleCategorySelect(null)" class="hover:text-blue-800 transition font-size-20px text-2xl">Home</a>
+            <a href="about.html" onclick="handleCategorySelect(null)" class="hover:text-blue-800 transition font-size-20px text-2xl">About</a>
+            <div class="relative" id="category-menu">
+                <button id="category-link" class="hover:text-blue-800 transition flex items-center cursor-pointer font-semibold outline-none text-2xl">
+                    Category <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                </button>
+                <div id="category-dropdown" class="hidden absolute top-full left-0 mt-4 bg-white border border-gray-200 rounded-xl shadow-xl z-50 min-w-[220px] py-2 text-xl"></div>
+            </div>
+        </div>
+        <button class="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition">Sign In</button>
+    </nav>
+
+    <section class="relative bg-blue-900 overflow-hidden py-4 md:py-6 min-h-[300px] flex items-center">
+        <div id="slideshow-container" class="max-w-7xl mx-auto px-6 w-full"></div>
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center space-x-6 z-10">
+            <button id="prev-slide" class="text-white/50 hover:text-white transition text-xl"><i class="fas fa-chevron-left"></i></button>
+            <div id="slide-dots" class="flex space-x-3"></div>
+            <button id="next-slide" class="text-white/50 hover:text-white transition text-xl"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <section class="bg-gray-50 py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h3 id="grid-title" class="text-3xl font-bold text-gray-900 mb-10">Explore our Fleet</h3>
+            <div id="car-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 text-center md:text-left">
+                <div class="col-span-1">
+                    <img src="ride ss.png" class="h-16 w-auto mb-6 mix-blend-mode-multiply md:mx-0 " alt="Ride SSD Logo" style="height: 150px; width: auto;">
+                    <p class="text-gray-400 text-xl ">Premium rentals for the modern traveler. Comfort and style with Ride SSD.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-2xl">Quick Links</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li><a href="#" class="hover:text-white text-2xl">About Us</a></li>
+                        <li><a href="#" class="hover:text-white text-2xl">Our Fleet</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-2xl">Support</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li><a href="#" class="hover:text-white text-2xl">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white text-2xl">Terms</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-xl">Contact Us</h4>
+                    <p class="text-gray-400 text-xl">RIDE SSD, Juba City</p>
+                    <p class="text-gray-400 mt-2 text-xl">+211 925 410 410</p>
+                    <a href="mailto:hello@yourdomain.com" class="text-gray-400 hover:text-white text-xl">ridessd@gmail.com</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm text-xl">
+                <p>© 2026 Ride SSD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="booking-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4">
+        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onclick="toggleModal()"></div>
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl p-8 relative z-10 overflow-y-auto max-h-[90vh]">
+            <button onclick="toggleModal()" class="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition"><i class="fas fa-times"></i></button>
+            
+            <h2 class="text-2xl font-bold mb-6 text-gray-900">Book <span id="selected-car-name" class="text-blue-600">Ride</span></h2>
+            
+            <div class="space-y-4">
+                <input type="hidden" id="selected-car-id">
+                <input type="text" id="pickup-location" placeholder="Pickup Location" class="w-full p-4 bg-gray-50 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="date" id="start-date" class="p-4 bg-gray-50 rounded-xl border">
+                    <input type="date" id="end-date" class="p-4 bg-gray-50 rounded-xl border">
+                </div>
+
+                <div class="pt-2">
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-3">Payment Method</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="flex items-center p-4 border-2 rounded-2xl cursor-pointer has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="payment" value="card" class="hidden" onchange="togglePaymentFields('card')" checked>
+                            <span class="font-bold text-gray-700"><i class="fas fa-credit-card mr-2 text-blue-600"></i>Card</span>
+                        </label>
+                        <label class="flex items-center p-4 border-2 rounded-2xl cursor-pointer has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50">
+                            <input type="radio" name="payment" value="momo" class="hidden" onchange="togglePaymentFields('momo')">
+                            <span class="font-bold text-gray-700"><i class="fas fa-mobile-alt mr-2 text-yellow-600"></i>MoMo</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="card-details-fields" class="space-y-3 bg-gray-50 p-4 rounded-2xl border">
+                    <input type="text" placeholder="Card Number" class="w-full p-3 bg-white rounded-lg border outline-none">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" placeholder="MM/YY" class="w-full p-3 bg-white rounded-lg border outline-none">
+                        <input type="text" placeholder="CVV" class="w-full p-3 bg-white rounded-lg border outline-none">
+                    </div>
+                </div>
+
+                <div id="momo-details-fields" class="hidden space-y-3 bg-gray-50 p-4 rounded-2xl border">
+                    <select id="momo-network" class="w-full p-3 bg-white rounded-lg border outline-none font-semibold text-gray-700">
+                        <option value="" disabled selected>Select Mobile Money service</option>
+                        <option value="mtn">MTN Mobile Money</option>
+                        <option value="Digitel">Digicash</option>
+                        <option value="Zain SSD">M-Gurush</option>
+                    </select>
+                    <input type="tel" id="momo-number" placeholder="Phone Number (e.g., +211...)" class="w-full p-3 bg-white rounded-lg border outline-none">
+                </div>
+
+                <button onclick="processBooking()" class="w-full bg-blue-600 text-white p-5 rounded-2xl font-bold hover:bg-blue-700 transition shadow-lg mt-4">Confirm & Pay Now</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="status-toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[200] hidden transition-all duration-500 transform translate-y-20 opacity-0 pointer-events-none">
+        <div id="toast-content" class="flex items-center space-x-3 px-8 py-4 rounded-2xl shadow-2xl border-2 bg-white">
+            <i id="toast-icon" class="fas text-xl"></i>
+            <span id="toast-message" class="font-extrabold"></span>
+        </div>
+    </div>
+
+    <script>
+        const cars = [
+            { id: 1, name: "Jeep", type: "Electric", purpose: "Adventure", price: 85, image: "jeep.jpg" },
+            { id: 2, name: "PX", type: "SUV", purpose: "Weekend", price: 120, image: "PX.jpg" },
+            { id: 3, name: "Mycar", type: "Sport", purpose: "Weekend", price: 150, image: "Mycar.jpg" },
+            { id: 4, name: "Chevrolet Lux", type: "Sedan", purpose: "Luxury Experience", price: 110, image: "Chevrolet Lux.jpg" },
+            { id: 5, name: "Nissan Patrol Pickup", type: "Electric", purpose: "Business", price: 85, image: "Nissan Patrol Pickup.jpg" },
+            { id: 6, name: "Range Rover Sport", type: "SUV", purpose: "Luxury Experience", price: 120, image: "Range r.jpg" },
+            { id: 7, name: "Tata Ace Gold", type: "Sport", purpose: "Business", price: 150, image: "Tata Ace Gold.jpg" },
+            { id: 8, name: "Tata Ace ", type: "Sedan", purpose: "Business", price: 110, image: "Tata Ace.jpg" },
+            { id: 9, name: "Hi Ace", type: "Electric", purpose: "Travel", price: 85, image: "Hi Ace.jpg" },
+            { id: 10, name: "Land cruiser", type: "SUV", purpose: "Adventure", price: 120, image: "Toyota landcr.jpg" },
+            { id: 11, name: "Florian", type: "Sport", purpose: "Luxury Experience", price: 150, image: "Florian-Schneider.jpg" },
+            { id: 12, name: "Pickup", type: "Sedan", purpose: "Business", price: 110, image: "Landcruiser pkp.jpg" },
+            { id: 13, name: "Mini Lux", type: "Sedan", purpose: "Weekend", price: 110, image: "Mini Lux.jpg" },
+            { id: 13, name: "Bentley", type: "Sedan", purpose: "Luxury Experience", price: 110, image: "Bentley.jpg" },
+            { id: 13, name: "Piro4", type: "Sedan", purpose: "Weekend", price: 110, image: "Piro4.jpg" },
+            { id: 13, name: "Ford", type: "Sedan", purpose: "Weekend", price: 110, image: "Ford.jpg" },
+            { id: 13, name: "Sven Lux", type: "Sedan", purpose: "Luxury Experience", price: 110, image: "Sven Lux.jpg" }
+        ];
+
+        let bookedCarIds = [];
+        let currentSlide = 0;
+        let autoPlayInterval;
+
+        function toggleModal(carId = null) {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.toggle('hidden');
+            if (carId) {
+                const car = cars.find(c => c.id === carId);
+                document.getElementById('selected-car-id').value = carId;
+                document.getElementById('selected-car-name').innerText = car.name;
+            }
+        }
+
+        function togglePaymentFields(method) {
+            document.getElementById('card-details-fields').classList.toggle('hidden', method !== 'card');
+            document.getElementById('momo-details-fields').classList.toggle('hidden', method !== 'momo');
+        }
+
+        function showToast(isSuccess, text) {
+            const toast = document.getElementById('status-toast');
+            const content = document.getElementById('toast-content');
+            const message = document.getElementById('toast-message');
+            content.className = `flex items-center space-x-3 px-8 py-4 rounded-2xl shadow-2xl border-2 bg-white ${isSuccess ? 'border-green-500 text-green-600' : 'border-red-500 text-red-600'}`;
+            message.innerText = text;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('toast-active'), 10);
+            setTimeout(() => { toast.classList.remove('toast-active'); setTimeout(() => toast.classList.add('hidden'), 500); }, 3000);
+        }
+
+        function processBooking() {
+            const loc = document.getElementById('pickup-location').value;
+            if (loc.trim() === "") {
+                showToast(false, "Please enter a pickup location.");
+                return;
+            }
+            const carId = parseInt(document.getElementById('selected-car-id').value);
+            bookedCarIds.push(carId);
+            showToast(true, "Booking successful! Your ride is confirmed.");
+            renderCars();
+            initSlideshow();
+            setTimeout(toggleModal, 1200);
+        }
+
+        function renderCars(filter = null) {
+            const carGrid = document.getElementById('car-grid');
+            const availableCars = cars.filter(c => !bookedCarIds.includes(c.id));
+            const displayCars = filter ? availableCars.filter(c => c.purpose === filter) : availableCars;
+            carGrid.innerHTML = displayCars.map(car => `
+                <div class="car-card bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-xl p-5">
+                    <img src="${car.image}" class="w-full h-48 object-cover rounded-2xl mb-4">
+                    <div class="flex justify-between items-start mb-4">
+                        <div><h4 class="text-xl font-bold text-gray-900">${car.name}</h4><p class="text-xs text-blue-600 font-bold uppercase">${car.purpose}</p></div>
+                        <span class="text-2xl font-bold text-gray-900">$${car.price}</span>
+                    </div>
+                    <button onclick="toggleModal(${car.id})" class="w-full py-4 rounded-2xl bg-gray-900 text-white font-bold hover:bg-blue-600 transition-all">Book Now</button>
+                </div>`).join('');
+        }
+
+        function initSlideshow() {
+            const container = document.getElementById('slideshow-container');
+            const dots = document.getElementById('slide-dots');
+            const availableSlides = cars.filter(c => !bookedCarIds.includes(c.id)).slice(0, 5);
+
+            if (availableSlides.length === 0) {
+                container.innerHTML = `<h2 class="text-white text-3xl font-bold text-center">All Premium Cars Booked!</h2>`;
+                return;
+            }
+
+            container.innerHTML = availableSlides.map((car, index) => `
+                <div class="slide ${index === 0 ? 'block' : 'hidden'} text-white" data-slide="${index}">
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                        <div class="flex-1 text-center md:text-left">
+                            <h3 class="text-4xl md:text-5xl font-extrabold mb-4">${car.name}</h3>
+                            <button onclick="toggleModal(${car.id})" class="bg-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition">Rent Now</button>
+                        </div>
+                        <div class="flex-1 flex justify-center md:justify-end">
+                            <img src="${car.image}" class="rounded-2xl shadow-xl w-full max-w-lg h-64 object-cover border-2 border-white/10">
+                        </div>
+                    </div>
+                </div>`).join('');
+            
+            dots.innerHTML = availableSlides.map((_, i) => `<button class="dot w-2 h-2 rounded-full transition-all ${i===0?'bg-white w-6':'bg-white/30'}" onclick="goToSlide(${i})"></button>`).join('');
+            currentSlide = 0;
+            resetAutoPlay();
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            if (!slides.length) return;
+            if (n >= slides.length) currentSlide = 0; if (n < 0) currentSlide = slides.length - 1;
+            slides.forEach((s, i) => s.classList.toggle('hidden', i !== currentSlide));
+            dots.forEach((d, i) => { d.classList.toggle('bg-white', i === currentSlide); d.classList.toggle('w-6', i === currentSlide); d.classList.toggle('bg-white/30', i !== currentSlide); d.classList.toggle('w-2', i !== currentSlide); });
+        }
+
+        function goToSlide(n) { currentSlide = n; showSlide(n); resetAutoPlay(); }
+        function nextSlide() { currentSlide++; showSlide(currentSlide); }
+        function startAutoPlay() { autoPlayInterval = setInterval(nextSlide, 6000); }
+        function resetAutoPlay() { clearInterval(autoPlayInterval); startAutoPlay(); }
+
+        const dropdown = document.getElementById('category-dropdown');
+        const categories = [...new Set(cars.map(c => c.purpose))];
+        dropdown.innerHTML = `<a href="#" class="block px-4 py-3 hover:bg-blue-50 font-bold border-b" onclick="handleCategorySelect(null)">All Cars</a>` + 
+            categories.map(cat => `<a href="#" class="block px-4 py-3 hover:bg-blue-50 transition" onclick="handleCategorySelect('${cat}')">${cat}</a>`).join('');
+        document.getElementById('category-link').onclick = (e) => { e.stopPropagation(); dropdown.classList.toggle('hidden'); };
+        function handleCategorySelect(cat) { renderCars(cat); dropdown.classList.add('hidden'); }
+
+        document.getElementById('next-slide').onclick = () => { nextSlide(); resetAutoPlay(); };
+        document.getElementById('prev-slide').onclick = () => { currentSlide--; showSlide(currentSlide); resetAutoPlay(); };
+
+        window.onload = () => { renderCars(); initSlideshow(); };
+        // Close dropdown when clicking anywhere outside of the category menu
+window.addEventListener('click', (e) => {
+    const categoryMenu = document.getElementById('category-menu');
+    const dropdown = document.getElementById('category-dropdown');
+    
+    // If the click is NOT inside the category-menu div, hide the dropdown
+    if (!categoryMenu.contains(e.target)) {
+        dropdown.classList.add('hidden');
+    }
+});
+    </script>
+</body>
+</html>
