@@ -6,6 +6,7 @@
     <title>Ride SSD | Premium Car Rentals</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
@@ -21,24 +22,27 @@
 
 </head>
 <body>
+    <!--Navigation Bar-->
 
-    <nav class="glass-nav sticky top-0 z-50 px-4 py-2 flex justify-between items-center">
-        <a href="#" class="flex items-center">
+    <nav class="glass-nav sticky top-0 z-50 px-4 py-2 flex items-center ">
+        <a href="#" class="flex items-center ">
             <img src="ride ss.png" class="h-20 w-auto blend-mode-mode-multiply" alt="Ride SSD Logo" style="height: 150px; width: auto;">
             <img src="navbar.png" class="h-6 w-auto ml-2" alt="Ride SSD Text Logo"  style="height: 100px; width: auto;">
             <p class="text-4xl font-bold text-blue-900 ml-2">Ride SSD</p>
         </a>
-        <div class="hidden md:flex space-x-8 font-semibold text-gray-600 ">
-            <a href="index.html" onclick="handleCategorySelect(null)" class="hover:text-blue-800 transition font-size-20px text-2xl">Home</a>
-            <a href="about.html" onclick="handleCategorySelect(null)" class="hover:text-blue-800 transition font-size-20px text-2xl">About</a>
-            <div class="relative" id="category-menu">
-                <button id="category-link" class="hover:text-blue-800 transition flex items-center cursor-pointer font-semibold outline-none text-2xl">
-                    Category <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                </button>
-                <div id="category-dropdown" class="hidden absolute top-full left-0 mt-4 bg-white border border-gray-200 rounded-xl shadow-xl z-50 min-w-[220px] py-2 text-xl"></div>
-            </div>
+        <div class="hidden md:flex justify-start items-center space-x-6 font-semibold text-gray-600 pl-2 mx-auto">
+    <a href="index.html" onclick="handleCategorySelect(null)" class="hover:text-blue-800 transition text-2xl mx-auto">Home</a>
+    <a href="about.html" onclick="handleCategorySelect(null)" class="hover:text-blue-800 transition text-2xl">About</a>
+    
+    <div class="relative" id="category-menu">
+        <button id="category-link" class="hover:text-blue-800 transition flex items-center cursor-pointer font-semibold outline-none text-2xl">
+            Category <i class="fas fa-chevron-down ml-1 text-xs"></i>
+        </button>
+        <div id="category-dropdown" class="hidden absolute top-full left-0 mt-4 bg-gray-300 border-gray-200 rounded-xl shadow-xl z-50 min-w-[220px] py-2 text-xl"></div>
+    </div>
+</div>
         </div>
-        <button class="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition">Sign In</button>
+        
     </nav>
 
     <section class="relative bg-blue-900 overflow-hidden py-4 md:py-6 min-h-[300px] flex items-center">
@@ -59,9 +63,9 @@
 
     <footer class="bg-gray-900 text-white pt-20 pb-10 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 mb-16 text-center md:text-left">
                 <div class="col-span-1">
-                    <img src="ride ss.png" class="h-16 w-auto mb-6 mix-blend-mode-multiply md:mx-0 " alt="Ride SSD Logo" style="height: 150px; width: auto;">
+                    <img src="ride ss.png" class="h-48 w-full mb-6 mix-blend-mode-multiply md:mx-0 " alt="Ride SSD Logo" style="height: 150px; width: auto;">
                     <p class="text-gray-400 text-xl ">Premium rentals for the modern traveler. Comfort and style with Ride SSD.</p>
                 </div>
                 <div>
@@ -294,6 +298,27 @@ window.addEventListener('click', (e) => {
         dropdown.classList.add('hidden');
     }
 });
+// 1. Define the media query (matching your CSS 768px breakpoint)
+const desktopView = window.matchMedia("(min-width: 768px)");
+
+function handleScreenChange(e) {
+    if (e.matches) {
+        // --- DESKTOP BEHAVIOR ---
+        console.log("Desktop mode active");
+        // Example: Make sure the mobile menu is hidden when scaling up
+        document.getElementById('mobile-menu')?.classList.add('hidden');
+    } else {
+        // --- MOBILE BEHAVIOR ---
+        console.log("Mobile mode active");
+        // Example: You might want to reset certain car fleet filters here
+    }
+}
+
+// 2. Run the function once at page load
+handleScreenChange(desktopView);
+
+// 3. Add a "listener" so it updates if the user resizes the window
+desktopView.addEventListener("change", handleScreenChange);
     </script>
 </body>
 </html>

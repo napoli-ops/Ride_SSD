@@ -1,0 +1,26 @@
+/* Custom Media Queries for Ride SSD */
+
+/* --- Mobile View (Phones) --- */
+@media (max-width: 767px) {
+    .nav-links-container {
+        display: none; /* Hide desktop links */
+    }
+    .mobile-menu-active {
+        display: flex !important; /* Show when hamburger is clicked */
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 70px;
+        width: 100%;
+    }
+}
+
+/* --- Desktop View (Laptops/Monitors) --- */
+@media (min-width: 768px) {
+    .nav-links-container {
+        display: flex !important;
+        justify-content: flex-start !important;
+        margin-right: auto;
+        gap: 2rem;
+    }
+}
