@@ -41,6 +41,19 @@
         <div id="category-dropdown" class="hidden absolute top-full left-0 mt-4 bg-gray-300 border-gray-200 rounded-xl shadow-xl z-50 min-w-[220px] py-2 text-xl"></div>
     </div>
 </div>
+<div class="md:hidden flex items-center">
+        <button id="mobile-menu-button" class="text-blue-900 focus:outline-none">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-lg flex-col items-center space-y-4 py-6 md:hidden transition-all duration-300 border-t">
+        <a href="index.html" class="text-xl font-semibold text-gray-700 hover:text-blue-800">Home</a>
+        <a href="about.html" class="text-xl font-semibold text-gray-700 hover:text-blue-800">About</a>
+        <a href="#" class="text-xl font-semibold text-gray-700 hover:text-blue-800">Category</a>
+    </div>
         </div>
         
     </nav>
@@ -61,39 +74,47 @@
         </div>
     </section>
 
-    <footer class="bg-gray-900 text-white pt-20 pb-10 px-6">
+    <footer class="bg-gray-900 text-white py-4  px-12">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 mb-16 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 mb-16 text-center md:text-center lg:text-left">
                 <div class="col-span-1">
-                    <img src="ride ss.png" class="h-48 w-full mb-6 mix-blend-mode-multiply md:mx-0 " alt="Ride SSD Logo" style="height: 150px; width: auto;">
+                    <img src="ride ss.png" class="h-30 w-full mb-6 mix-blend-mode-multiply md:mx-0 " alt="Ride SSD Logo" style="height: 150px; width: auto;">
                     <p class="text-gray-400 text-xl ">Premium rentals for the modern traveler. Comfort and style with Ride SSD.</p>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-6 text-2xl">Quick Links</h4>
-                    <ul class="space-y-4 text-gray-400">
-                        <li><a href="#" class="hover:text-white text-2xl">About Us</a></li>
-                        <li><a href="#" class="hover:text-white text-2xl">Our Fleet</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-6 text-2xl">Support</h4>
-                    <ul class="space-y-4 text-gray-400">
-                        <li><a href="#" class="hover:text-white text-2xl">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-white text-2xl">Terms</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-6 text-xl">Contact Us</h4>
-                    <p class="text-gray-400 text-xl">RIDE SSD, Juba City</p>
-                    <p class="text-gray-400 mt-2 text-xl">+211 925 410 410</p>
-                    <a href="mailto:hello@yourdomain.com" class="text-gray-400 hover:text-white text-xl">ridessd@gmail.com</a>
-                </div>
+                <footer class="bg-gray-900 text-white h-30 w-auto pb-12px">
+    <div class="container mx-12 px-16 px-12 flex-items-center justify-between flex-wrap">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-8">
+            
+            <div>
+                <h4 class="font-bold mb-4 text-2xl px-10">Quick Links</h4>
+                <ul class="space-y-6 text-gray-400">
+                    <li><a href="#" class="hover:text-white text-xl">About Us</a></li>
+                    <li><a href="#" class="hover:text-white text-xl">Our Fleet</a></li>
+                </ul>
             </div>
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm text-xl">
-                <p>© 2026 Ride SSD. All rights reserved.</p>
+
+            <div>
+                <h4 class="font-bold mb-4 text-2xl">Support</h4>
+                <ul class="space-y-6 text-gray-400">
+                    <li><a href="#" class="hover:text-white text-xl">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white text-xl">Terms</a></li>
+                </ul>
             </div>
+
+            <div>
+                <h4 class="font-bold mb-4 text-2xl">Contact Us</h4>
+                <p class="text-gray-400 text-xl">RIDE SSD, Juba City</p>
+                <p class="text-gray-400 mt-2 text-xl">+211 925 410 410</p>
+                <a href="mailto:ridessd@gmail.com" class="text-gray-400 hover:text-white text-xl">ridessd@gmail.com</a>
+            </div>
+
         </div>
-    </footer>
+
+        <div class="border-b border-gray-800 pt-8 text-center text-gray-500 text-xl">
+            <p>© 2026 Ride SSD. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
    <div id="booking-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4 py-6">
     <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onclick="toggleModal()"></div>
@@ -352,6 +373,14 @@ handleScreenChange(desktopView);
 
 // 3. Add a "listener" so it updates if the user resizes the window
 desktopView.addEventListener("change", handleScreenChange);
+const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('flex'); // Switch between hidden and flex display
+    });
+
     </script>
 </body>
 </html>

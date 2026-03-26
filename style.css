@@ -18,9 +18,19 @@
 /* --- Desktop View (Laptops/Monitors) --- */
 @media (min-width: 768px) {
     .nav-links-container {
-        display: flex !important;
-        justify-content: flex-start !important;
+        display: flex;
+        justify-content: flex-start;
         margin-right: auto;
         gap: 2rem;
     }
 }
+@media (max-width: 600px) {
+    .nav-links-container {
+        display: flex;
+        justify-content: flex-start;
+        margin-right: auto;
+        gap: 2rem;
+    }
+    
+}
+/* 1. Target the Nav Container */
